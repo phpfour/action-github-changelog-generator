@@ -44,7 +44,8 @@ with:
 | `usernamesAsGithubLogins` | Use GitHub tags instead of Markdown links for the author of an issue or pull-request. | [inherit] |
 | `unreleasedOnly` | Generate log from unreleased closed issues only. | [inherit] |
 | `unreleased` | Add to log unreleased closed issues. | [inherit] |
-| `unreleasedLabel` | Include compare link (Full Changelog) between older version and newer version. | [inherit] |
+| `unreleasedLabel` | Set up custom label for unreleased closed issues section. | [inherit] |
+| `compareLink` | Include compare link (Full Changelog) between older version and newer version. | [inherit] |
 | `includeLabels` | Of the labeled issues, only include the ones with the specified labels. | [inherit] |
 | `excludeLabels` | Issues with the specified labels will be excluded from changelog. | [inherit] |
 | `issueLineLabels` | The specified labels will be shown in brackets next to each matching issue. Use "ALL" to show all labels. | [inherit] |
