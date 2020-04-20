@@ -6,7 +6,7 @@ istrue () {
   esac
 }
 
-set -ex
+set -e
 
 # Go to GitHub workspace.
 if [ -n "$GITHUB_WORKSPACE" ]; then
