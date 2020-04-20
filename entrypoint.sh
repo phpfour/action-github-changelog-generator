@@ -6,6 +6,8 @@ istrue () {
   esac
 }
 
+set -ex
+
 # Go to GitHub workspace.
 if [ -n "$GITHUB_WORKSPACE" ]; then
   cd "$GITHUB_WORKSPACE" || exit
