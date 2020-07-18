@@ -65,6 +65,9 @@ inputs:
     description: "Add to log unreleased closed issues."
     required: false
   unreleasedLabel:
+    description: "Set up custom label for unreleased closed issues section."
+    required: false
+  compareLink:
     description: "Include compare link (Full Changelog) between older version and newer version."
     required: false
   includeLabels:
