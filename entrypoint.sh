@@ -6,6 +6,8 @@ istrue () {
   esac
 }
 
+set -e
+
 # Go to GitHub workspace.
 if [ -n "$GITHUB_WORKSPACE" ]; then
   cd "$GITHUB_WORKSPACE" || exit
@@ -33,9 +35,9 @@ if [ -n "$INPUT_DATEFORMAT" ]; then ARG_DATEFORMAT="--date-format $INPUT_DATEFOR
 if [ -n "$INPUT_OUTPUT" ]; then ARG_OUTPUT="--output $INPUT_OUTPUT"; fi
 if [ -n "$INPUT_BASE" ]; then ARG_BASE="--base $INPUT_BASE"; fi
 if [ -n "$INPUT_HEADERLABEL" ]; then ARG_HEADERLABEL="--header-label $INPUT_HEADERLABEL"; fi
-if [ -n "$INPUT_CONFIGURESECTIONS" ]; then ARG_CONFIGURESECTIONS="--configure-sections $INPUT_CONFIGURESECTIONS"; fi
-if [ -n "$INPUT_ADDSECTIONS" ]; then ARG_ADDSECTIONS="--add-sections $INPUT_ADDSECTIONS"; fi
-if [ -n "$INPUT_FRONTMATTER" ]; then ARG_FRONTMATTER="--front-matter $INPUT_FRONTMATTER"; fi
+if [ -n "$INPUT_CONFIGURESECTIONS" ]; then ARG_CONFIGURESECTIONS=(--configure-sections "$INPUT_CONFIGURESECTIONS"); fi
+if [ -n "$INPUT_ADDSECTIONS" ]; then ARG_ADDSECTIONS=(--add-sections "$INPUT_ADDSECTIONS"); fi
+if [ -n "$INPUT_FRONTMATTER" ]; then ARG_FRONTMATTER=(--front-matter "$INPUT_FRONTMATTER"); fi
 if istrue "$INPUT_ISSUES"; then ARG_ISSUES="--issues"; else ARG_ISSUES="--no-issues"; fi
 if istrue "$INPUT_ISSUESWOLABELS"; then ARG_ISSUESWOLABELS="--issues-wo-labels"; else ARG_ISSUESWOLABELS="--no-issues-wo-labels"; fi
 if istrue "$INPUT_PULLREQUESTS"; then ARG_PULLREQUESTS="--pull-requests"; else ARG_PULLREQUESTS="--no-pull-requests"; fi
@@ -66,17 +68,17 @@ if [ -n "$INPUT_CACHEFILE" ]; then ARG_CACHEFILE="--cache-file $INPUT_CACHEFILE"
 if [ -n "$INPUT_CACHELOG" ]; then ARG_CACHELOG="--cache-log $INPUT_CACHELOG"; fi
 if [ -n "$INPUT_SSLCAFILE" ]; then ARG_SSLCAFILE="--ssl-ca-file $INPUT_SSLCAFILE"; fi
 if istrue "$INPUT_VERBOSE"; then ARG_VERBOSE="--verbose"; else ARG_VERBOSE="--no-verbose"; fi
-if [ -n "$INPUT_BREAKINGLABEL" ]; then ARG_BREAKINGLABEL="--breaking-label $INPUT_BREAKINGLABEL"; fi
+if [ -n "$INPUT_BREAKINGLABEL" ]; then ARG_BREAKINGLABEL=(--breaking-label "$INPUT_BREAKINGLABEL"); fi
 if [ -n "$INPUT_BREAKINGLABELS" ]; then ARG_BREAKINGLABELS="--breaking-labels $INPUT_BREAKINGLABELS"; fi
-if [ -n "$INPUT_ENHANCEMENTLABEL" ]; then ARG_ENHANCEMENTLABEL="--enhancement-label $INPUT_ENHANCEMENTLABEL"; fi
+if [ -n "$INPUT_ENHANCEMENTLABEL" ]; then ARG_ENHANCEMENTLABEL=(--enhancement-label "$INPUT_ENHANCEMENTLABEL"); fi
 if [ -n "$INPUT_ENHANCEMENTLABELS" ]; then ARG_ENHANCEMENTLABELS="--enhancement-labels $INPUT_ENHANCEMENTLABELS"; fi
-if [ -n "$INPUT_BUGSLABEL" ]; then ARG_BUGSLABEL="--bugs-label $INPUT_BUGSLABEL"; fi
+if [ -n "$INPUT_BUGSLABEL" ]; then ARG_BUGSLABEL=(--bugs-label "$INPUT_BUGSLABEL"); fi
 if [ -n "$INPUT_BUGLABELS" ]; then ARG_BUGLABELS="--bug-labels $INPUT_BUGLABELS"; fi
-if [ -n "$INPUT_DEPRECATEDLABEL" ]; then ARG_DEPRECATEDLABEL="--deprecated-label $INPUT_DEPRECATEDLABEL"; fi
+if [ -n "$INPUT_DEPRECATEDLABEL" ]; then ARG_DEPRECATEDLABEL=(--deprecated-label "$INPUT_DEPRECATEDLABEL"); fi
 if [ -n "$INPUT_DEPRECATEDLABELS" ]; then ARG_DEPRECATEDLABELS="--deprecated-labels $INPUT_DEPRECATEDLABELS"; fi
-if [ -n "$INPUT_REMOVEDLABEL" ]; then ARG_REMOVEDLABEL="--removed-label $INPUT_REMOVEDLABEL"; fi
+if [ -n "$INPUT_REMOVEDLABEL" ]; then ARG_REMOVEDLABEL=(--removed-label "$INPUT_REMOVEDLABEL"); fi
 if [ -n "$INPUT_REMOVEDLABELS" ]; then ARG_REMOVEDLABELS="--removed-labels $INPUT_REMOVEDLABELS"; fi
-if [ -n "$INPUT_SECURITYLABEL" ]; then ARG_SECURITYLABEL="--security-label $INPUT_SECURITYLABEL"; fi
+if [ -n "$INPUT_SECURITYLABEL" ]; then ARG_SECURITYLABEL=(--security-label "$INPUT_SECURITYLABEL"); fi
 if [ -n "$INPUT_SECURITYLABELS" ]; then ARG_SECURITYLABELS="--security-labels $INPUT_SECURITYLABELS"; fi
 if [ -n "$INPUT_ISSUESLABEL" ]; then ARG_ISSUESLABEL="--issues-label $INPUT_ISSUESLABEL"; fi
 if [ -n "$INPUT_PRLABEL" ]; then ARG_PRLABEL="--pr-label $INPUT_PRLABEL"; fi
@@ -91,9 +93,9 @@ github_changelog_generator \
   $ARG_OUTPUT \
   $ARG_BASE \
   $ARG_HEADERLABEL \
-  $ARG_CONFIGURESECTIONS \
-  $ARG_ADDSECTIONS \
-  $ARG_FRONTMATTER \
+  "${ARG_CONFIGURESECTIONS[@]}" \
+  "${ARG_ADDSECTIONS[@]}" \
+  "${ARG_FRONTMATTER[@]}" \
   $ARG_ISSUES \
   $ARG_ISSUESWOLABELS \
   $ARG_PULLREQUESTS \
@@ -124,17 +126,17 @@ github_changelog_generator \
   $ARG_CACHELOG \
   $ARG_SSLCAFILE \
   $ARG_VERBOSE \
-  $ARG_BREAKINGLABEL \
+  "${ARG_BREAKINGLABEL[@]}" \
   $ARG_BREAKINGLABELS \
-  $ARG_ENHANCEMENTLABEL \
+  "${ARG_ENHANCEMENTLABEL[@]}" \
   $ARG_ENHANCEMENTLABELS \
-  $ARG_BUGSLABEL \
+  "${ARG_BUGSLABEL[@]}" \
   $ARG_BUGLABELS \
-  $ARG_DEPRECATEDLABEL \
+  "${ARG_DEPRECATEDLABEL[@]}" \
   $ARG_DEPRECATEDLABELS \
-  $ARG_REMOVEDLABEL \
+  "${ARG_REMOVEDLABEL[@]}" \
   $ARG_REMOVEDLABELS \
-  $ARG_SECURITYLABEL \
+  "${ARG_SECURITYLABEL[@]}" \
   $ARG_SECURITYLABELS \
   $ARG_ISSUESLABEL \
   $ARG_PRLABEL
