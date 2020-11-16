@@ -47,7 +47,7 @@ if istrue "$INPUT_AUTHOR"; then ARG_AUTHOR="--author"; else ARG_AUTHOR="--no-aut
 if istrue "$INPUT_USERNAMESASGITHUBLOGINS"; then ARG_USERNAMESASGITHUBLOGINS="--usernames-as-github-logins"; fi
 if istrue "$INPUT_UNRELEASEDONLY"; then ARG_UNRELEASEDONLY="--unreleased-only"; fi
 if istrue "$INPUT_UNRELEASED"; then ARG_UNRELEASED="--unreleased"; else ARG_ISSUES="--no-unreleased"; fi
-if [ -n "$INPUT_UNRELEASEDLABEL" ]; then ARG_UNRELEASEDLABEL="--unreleased-label $INPUT_UNRELEASEDLABEL"; fi
+if [ -n "$INPUT_UNRELEASEDLABEL" ]; then ARG_UNRELEASEDLABEL=(--unreleased-label "$INPUT_UNRELEASEDLABEL"); fi
 if istrue "$INPUT_COMPARELINK"; then ARG_COMPARELINK="--compare-link"; else ARG_COMPARELINK="--no-compare-link"; fi
 if [ -n "$INPUT_INCLUDELABELS" ]; then ARG_INCLUDELABELS="--include-labels $INPUT_INCLUDELABELS"; fi
 if [ -n "$INPUT_EXCLUDELABELS" ]; then ARG_EXCLUDELABELS="--exclude-labels $INPUT_EXCLUDELABELS"; fi
@@ -80,8 +80,8 @@ if [ -n "$INPUT_REMOVEDLABEL" ]; then ARG_REMOVEDLABEL=(--removed-label "$INPUT_
 if [ -n "$INPUT_REMOVEDLABELS" ]; then ARG_REMOVEDLABELS="--removed-labels $INPUT_REMOVEDLABELS"; fi
 if [ -n "$INPUT_SECURITYLABEL" ]; then ARG_SECURITYLABEL=(--security-label "$INPUT_SECURITYLABEL"); fi
 if [ -n "$INPUT_SECURITYLABELS" ]; then ARG_SECURITYLABELS="--security-labels $INPUT_SECURITYLABELS"; fi
-if [ -n "$INPUT_ISSUESLABEL" ]; then ARG_ISSUESLABEL="--issues-label $INPUT_ISSUESLABEL"; fi
-if [ -n "$INPUT_PRLABEL" ]; then ARG_PRLABEL="--pr-label $INPUT_PRLABEL"; fi
+if [ -n "$INPUT_ISSUESLABEL" ]; then ARG_ISSUESLABEL=(--issues-label "$INPUT_ISSUESLABEL"); fi
+if [ -n "$INPUT_PRLABEL" ]; then ARG_PRLABEL=(--pr-label "$INPUT_PRLABEL"); fi
 
 # Generate change log.
 # shellcheck disable=SC2086 # We specifically want to allow word splitting.
@@ -105,7 +105,7 @@ github_changelog_generator \
   $ARG_USERNAMESASGITHUBLOGINS \
   $ARG_UNRELEASEDONLY \
   $ARG_UNRELEASED \
-  $ARG_UNRELEASEDLABEL \
+  "${ARG_UNRELEASEDLABEL[@]}" \
   $ARG_COMPARELINK \
   $ARG_INCLUDELABELS \
   $ARG_EXCLUDELABELS \
@@ -138,8 +138,8 @@ github_changelog_generator \
   $ARG_REMOVEDLABELS \
   "${ARG_SECURITYLABEL[@]}" \
   $ARG_SECURITYLABELS \
-  $ARG_ISSUESLABEL \
-  $ARG_PRLABEL
+  "${ARG_ISSUESLABEL[@]}" \
+  "${ARG_PRLABEL[@]}"
 
 # Locate change log.
 FILE="CHANGELOG.md"
