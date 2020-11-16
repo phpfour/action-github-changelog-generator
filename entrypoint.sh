@@ -159,5 +159,10 @@ fi
 
 # Save change log to outputs.
 if [[ -e "$FILE" ]]; then
-  echo ::set-output name=changelog::"$(cat "$FILE")"
+  CONTENT=$(cat "$FILE")
+  # Escape as per https://github.community/t/set-output-truncates-multiline-strings/16852/3.
+  CONTENT="${CONTENT//'%'/'%25'}"
+  CONTENT="${CONTENT//$'\n'/'%0A'}"
+  CONTENT="${CONTENT//$'\r'/'%0D'}"
+  echo ::set-output name=changelog::"$CONTENT"
 fi
