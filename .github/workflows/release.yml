@@ -12,20 +12,18 @@ jobs:
     steps:
       - name: "📥 Check-out"
         uses: actions/checkout@v1
-      - name: "✏️ Generate changelog"
-        id: generate-changelog
-        uses: heinrichreimer/action-github-changelog-generator@v2.2
+      - name: "✏️ Generate release changelog"
+        id: generate-release-changelog
+        uses: ./
         with:
           onlyLastTag: "true"
           stripHeaders: "true"
           stripGeneratorNotice: "true"
       - name: "🚀 Create GitHub release"
-        uses: actions/create-release@v1.0.1
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: ${{ steps.generate-changelog.outputs.changelog }}
-          draft: true
-          prerelease: false
+          body: ${{ steps.generate-release-changelog.outputs.changelog }}
