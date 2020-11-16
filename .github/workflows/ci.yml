@@ -13,7 +13,8 @@ jobs:
         id: generate-full-changelog
         uses: ./
         with:
-          headerLabel: "# Changelog"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          headerLabel: "# 📑 Changelog"
           breakingLabel: '### 💥 Breaking'
           enhancementLabel: '### 🚀 Enhancements'
           bugsLabel: '### 🐛 Bug fixes'
@@ -32,6 +33,8 @@ jobs:
           compareLink: true
           stripGeneratorNotice: true
           verbose: true
+      - name: "🖨️ Print changelog to console"
+        run: cat CHANGELOG.md
       - name: "📤 Upload changelog"
         uses: actions/upload-artifact@v1.0.0
         with:
