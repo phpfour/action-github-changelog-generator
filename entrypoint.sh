@@ -34,7 +34,7 @@ if [ -n "$INPUT_TOKEN" ]; then ARG_TOKEN="--token $INPUT_TOKEN"; fi
 if [ -n "$INPUT_DATEFORMAT" ]; then ARG_DATEFORMAT="--date-format $INPUT_DATEFORMAT"; fi
 if [ -n "$INPUT_OUTPUT" ]; then ARG_OUTPUT="--output $INPUT_OUTPUT"; fi
 if [ -n "$INPUT_BASE" ]; then ARG_BASE="--base $INPUT_BASE"; fi
-if [ -n "$INPUT_HEADERLABEL" ]; then ARG_HEADERLABEL="--header-label $INPUT_HEADERLABEL"; fi
+if [ -n "$INPUT_HEADERLABEL" ]; then ARG_HEADERLABEL=(--header-label "$INPUT_HEADERLABEL"); fi
 if [ -n "$INPUT_CONFIGURESECTIONS" ]; then ARG_CONFIGURESECTIONS=(--configure-sections "$INPUT_CONFIGURESECTIONS"); fi
 if [ -n "$INPUT_ADDSECTIONS" ]; then ARG_ADDSECTIONS=(--add-sections "$INPUT_ADDSECTIONS"); fi
 if [ -n "$INPUT_FRONTMATTER" ]; then ARG_FRONTMATTER=(--front-matter "$INPUT_FRONTMATTER"); fi
@@ -92,7 +92,7 @@ github_changelog_generator \
   $ARG_DATEFORMAT \
   $ARG_OUTPUT \
   $ARG_BASE \
-  $ARG_HEADERLABEL \
+  "${ARG_HEADERLABEL[@]}" \
   "${ARG_CONFIGURESECTIONS[@]}" \
   "${ARG_ADDSECTIONS[@]}" \
   "${ARG_FRONTMATTER[@]}" \
