@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "✏️ Generate release changelog"
-        uses: heinrichreimer/github-changelog-generator-action@v2.1.1
+        uses: heinrichreimer/github-changelog-generator-action@v2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }} 
 ```
