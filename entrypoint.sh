@@ -38,17 +38,17 @@ if [ -n "$INPUT_HEADERLABEL" ]; then ARG_HEADERLABEL=(--header-label "$INPUT_HEA
 if [ -n "$INPUT_CONFIGURESECTIONS" ]; then ARG_CONFIGURESECTIONS=(--configure-sections "$INPUT_CONFIGURESECTIONS"); fi
 if [ -n "$INPUT_ADDSECTIONS" ]; then ARG_ADDSECTIONS=(--add-sections "$INPUT_ADDSECTIONS"); fi
 if [ -n "$INPUT_FRONTMATTER" ]; then ARG_FRONTMATTER=(--front-matter "$INPUT_FRONTMATTER"); fi
-if istrue "$INPUT_ISSUES"; then ARG_ISSUES="--issues"; else ARG_ISSUES="--no-issues"; fi
-if istrue "$INPUT_ISSUESWOLABELS"; then ARG_ISSUESWOLABELS="--issues-wo-labels"; else ARG_ISSUESWOLABELS="--no-issues-wo-labels"; fi
-if istrue "$INPUT_PULLREQUESTS"; then ARG_PULLREQUESTS="--pull-requests"; else ARG_PULLREQUESTS="--no-pull-requests"; fi
-if istrue "$INPUT_PRWOLABELS"; then ARG_PRWOLABELS="--pr-wo-labels"; else ARG_PRWOLABELS="--no-pr-wo-labels"; fi
-if istrue "$INPUT_FILTERBYMILESTONE"; then ARG_FILTERBYMILESTONE="--filter-by-milestone"; else ARG_FILTERBYMILESTONE="--no-filter-by-milestone"; fi
-if istrue "$INPUT_AUTHOR"; then ARG_AUTHOR="--author"; else ARG_AUTHOR="--no-author"; fi
-if istrue "$INPUT_USERNAMESASGITHUBLOGINS"; then ARG_USERNAMESASGITHUBLOGINS="--usernames-as-github-logins"; fi
-if istrue "$INPUT_UNRELEASEDONLY"; then ARG_UNRELEASEDONLY="--unreleased-only"; fi
-if istrue "$INPUT_UNRELEASED"; then ARG_UNRELEASED="--unreleased"; else ARG_ISSUES="--no-unreleased"; fi
+if [[ -n $INPUT_ISSUES ]]; then if istrue "$INPUT_ISSUES"; then ARG_ISSUES="--issues"; else ARG_ISSUES="--no-issues"; fi; fi
+if [[ -n $INPUT_ISSUESWOLABELS ]]; then if istrue "$INPUT_ISSUESWOLABELS"; then ARG_ISSUESWOLABELS="--issues-wo-labels"; else ARG_ISSUESWOLABELS="--no-issues-wo-labels"; fi; fi
+if [[ -n $INPUT_PULLREQUESTS ]]; then if istrue "$INPUT_PULLREQUESTS"; then ARG_PULLREQUESTS="--pull-requests"; else ARG_PULLREQUESTS="--no-pull-requests"; fi; fi
+if [[ -n $INPUT_PRWOLABELS ]]; then if istrue "$INPUT_PRWOLABELS"; then ARG_PRWOLABELS="--pr-wo-labels"; else ARG_PRWOLABELS="--no-pr-wo-labels"; fi; fi
+if [[ -n $INPUT_FILTERBYMILESTONE ]]; then if istrue "$INPUT_FILTERBYMILESTONE"; then ARG_FILTERBYMILESTONE="--filter-by-milestone"; else ARG_FILTERBYMILESTONE="--no-filter-by-milestone"; fi; fi
+if [[ -n $INPUT_AUTHOR ]]; then if istrue "$INPUT_AUTHOR"; then ARG_AUTHOR="--author"; else ARG_AUTHOR="--no-author"; fi; fi
+if [[ -n $INPUT_USERNAMESASGITHUBLOGINS ]]; then if istrue "$INPUT_USERNAMESASGITHUBLOGINS"; then ARG_USERNAMESASGITHUBLOGINS="--usernames-as-github-logins"; fi; fi
+if [[ -n $INPUT_UNRELEASEDONLY ]]; then if istrue "$INPUT_UNRELEASEDONLY"; then ARG_UNRELEASEDONLY="--unreleased-only"; fi; fi
+if [[ -n $INPUT_UNRELEASED ]]; then if istrue "$INPUT_UNRELEASED"; then ARG_UNRELEASED="--unreleased"; else ARG_ISSUES="--no-unreleased"; fi; fi
 if [ -n "$INPUT_UNRELEASEDLABEL" ]; then ARG_UNRELEASEDLABEL=(--unreleased-label "$INPUT_UNRELEASEDLABEL"); fi
-if istrue "$INPUT_COMPARELINK"; then ARG_COMPARELINK="--compare-link"; else ARG_COMPARELINK="--no-compare-link"; fi
+if [[ -n $INPUT_COMPARELINK ]]; then if istrue "$INPUT_COMPARELINK"; then ARG_COMPARELINK="--compare-link"; else ARG_COMPARELINK="--no-compare-link"; fi; fi
 if [ -n "$INPUT_INCLUDELABELS" ]; then ARG_INCLUDELABELS=(--include-labels "$INPUT_INCLUDELABELS"); fi
 if [ -n "$INPUT_EXCLUDELABELS" ]; then ARG_EXCLUDELABELS=(--exclude-labels "$INPUT_EXCLUDELABELS"); fi
 if [ -n "$INPUT_ISSUELINELABELS" ]; then ARG_ISSUELINELABELS=(--issue-line-labels "$INPUT_ISSUELINELABELS"); fi
@@ -60,14 +60,14 @@ if [ -n "$INPUT_MAXISSUES" ]; then ARG_MAXISSUES="--max-issues $INPUT_MAXISSUES"
 if [ -n "$INPUT_RELEASEURL" ]; then ARG_RELEASEURL="--release-url $INPUT_RELEASEURL"; fi
 if [ -n "$INPUT_GITHUBSITE" ]; then ARG_GITHUBSITE="--github-site $INPUT_GITHUBSITE"; fi
 if [ -n "$INPUT_GITHUBAPI" ]; then ARG_GITHUBAPI="--github-api $INPUT_GITHUBAPI"; fi
-if istrue "$INPUT_SIMPLELIST"; then ARG_SIMPLELIST="--simple-list"; fi
+if [[ -n $INPUT_SIMPLELIST ]]; then if istrue "$INPUT_SIMPLELIST"; then ARG_SIMPLELIST="--simple-list"; fi; fi
 if [ -n "$INPUT_FUTURERELEASE" ]; then ARG_FUTURERELEASE="--future-release $INPUT_FUTURERELEASE"; fi
 if [ -n "$INPUT_RELEASEBRANCH" ]; then ARG_RELEASEBRANCH="--release-branch $INPUT_RELEASEBRANCH"; fi
-if istrue "$INPUT_HTTPCACHE"; then ARG_HTTPCACHE="--http-cache"; fi
+if [[ -n $INPUT_HTTPCACHE ]]; then if istrue "$INPUT_HTTPCACHE"; then ARG_HTTPCACHE="--http-cache"; fi; fi
 if [ -n "$INPUT_CACHEFILE" ]; then ARG_CACHEFILE="--cache-file $INPUT_CACHEFILE"; fi
 if [ -n "$INPUT_CACHELOG" ]; then ARG_CACHELOG="--cache-log $INPUT_CACHELOG"; fi
 if [ -n "$INPUT_SSLCAFILE" ]; then ARG_SSLCAFILE="--ssl-ca-file $INPUT_SSLCAFILE"; fi
-if istrue "$INPUT_VERBOSE"; then ARG_VERBOSE="--verbose"; else ARG_VERBOSE="--no-verbose"; fi
+if [[ -n $INPUT_VERBOSE ]]; then if istrue "$INPUT_VERBOSE"; then ARG_VERBOSE="--verbose"; else ARG_VERBOSE="--no-verbose"; fi; fi
 if [ -n "$INPUT_BREAKINGLABEL" ]; then ARG_BREAKINGLABEL=(--breaking-label "$INPUT_BREAKINGLABEL"); fi
 if [ -n "$INPUT_BREAKINGLABELS" ]; then ARG_BREAKINGLABELS=(--breaking-labels "$INPUT_BREAKINGLABELS"); fi
 if [ -n "$INPUT_ENHANCEMENTLABEL" ]; then ARG_ENHANCEMENTLABEL=(--enhancement-label "$INPUT_ENHANCEMENTLABEL"); fi
