@@ -15,9 +15,19 @@ This action also makes the changelog available to other actions as [output](#out
 ## Example usage
 
 ```yaml
-uses: heinrichreimer/github-changelog-generator-action@v2.1.1
-with:
-  token: ${{ secrets.GITHUB_TOKEN }}
+name: Changelog
+on:
+  release:
+    types:
+      - created
+jobs:
+  changelog:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "✏️ Generate release changelog"
+        uses: heinrichreimer/github-changelog-generator-action@v2.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} 
 ```
 
 ## Inputs
