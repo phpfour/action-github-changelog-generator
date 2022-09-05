@@ -89,7 +89,7 @@ github_changelog_generator \
   $ARG_USER \
   $ARG_PROJECT \
   $ARG_TOKEN \
-  $ARG_DATEFORMAT \
+  "$ARG_DATEFORMAT" \
   $ARG_OUTPUT \
   $ARG_BASE \
   "${ARG_HEADERLABEL[@]}" \
