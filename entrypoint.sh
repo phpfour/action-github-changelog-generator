@@ -31,7 +31,7 @@ fi
 if [ -n "$INPUT_USER" ]; then ARG_USER="--user $INPUT_USER"; fi
 if [ -n "$INPUT_PROJECT" ]; then ARG_PROJECT="--project $INPUT_PROJECT"; fi
 if [ -n "$INPUT_TOKEN" ]; then ARG_TOKEN="--token $INPUT_TOKEN"; fi
-if [ -n "$INPUT_DATEFORMAT" ]; then ARG_DATEFORMAT=(--date-format "$INPUT_DATEFORMAT"); fi
+if [ -n "$INPUT_DATEFORMAT" ]; then ARG_DATEFORMAT="--date-format '$INPUT_DATEFORMAT'"; fi
 if [ -n "$INPUT_OUTPUT" ]; then ARG_OUTPUT="--output $INPUT_OUTPUT"; fi
 if [ -n "$INPUT_BASE" ]; then ARG_BASE="--base $INPUT_BASE"; fi
 if [ -n "$INPUT_HEADERLABEL" ]; then ARG_HEADERLABEL=(--header-label "$INPUT_HEADERLABEL"); fi
